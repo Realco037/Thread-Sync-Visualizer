@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #03050d;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar         { width: 4px; height: 4px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: #1a2540; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #2a3a60; }
+
+/* ── Glassmorphism panels ──────────────────────────────── */
+@layer components {
+  .glass {
+    background: rgba(13, 20, 36, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+
+  .glass-rim {
+    background: rgba(26, 37, 64, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* State-specific neon glows */
+  .glow-running {
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5),
+                0 0 25px rgba(0, 255, 136, 0.2),
+                inset 0 0 12px rgba(0, 255, 136, 0.05);
+  }
+  .glow-waiting {
+    box-shadow: 0 0 10px rgba(255, 183, 0, 0.4),
+                0 0 25px rgba(255, 183, 0, 0.15),
+                inset 0 0 12px rgba(255, 183, 0, 0.04);
+  }
+  .glow-blocked {
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.4),
+                0 0 25px rgba(255, 51, 102, 0.15),
+                inset 0 0 12px rgba(255, 51, 102, 0.04);
+  }
+  .glow-blue {
+    box-shadow: 0 0 10px rgba(0, 180, 255, 0.4),
+                0 0 25px rgba(0, 180, 255, 0.15);
+  }
+  .glow-purple {
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.4),
+                0 0 25px rgba(168, 85, 247, 0.15);
+  }
+
+  /* Tab nav pill */
+  .tab-pill {
+    position: relative;
+    padding: 0.55rem 1.3rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s, background 0.2s;
+    color: #64748b;
+    cursor: pointer;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .tab-pill:hover {
+    color: #94a3b8;
+    background: rgba(255,255,255,0.04);
+  }
+  .tab-pill.active {
+    color: #e2e8f0;
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.25), inset 0 0 8px rgba(168, 85, 247, 0.08);
+  }
+
+  /* Neon badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .badge-running { background: rgba(0,255,136,0.12); color: #00ff88; border: 1px solid rgba(0,255,136,0.3); }
+  .badge-waiting { background: rgba(255,183,0,0.12);  color: #ffb700; border: 1px solid rgba(255,183,0,0.3); }
+  .badge-blocked { background: rgba(255,51,102,0.12);  color: #ff3366; border: 1px solid rgba(255,51,102,0.3); }
+  .badge-owner   { background: rgba(0,180,255,0.12);   color: #00b4ff; border: 1px solid rgba(0,180,255,0.3); }
+}
+
+/* ── Background grid texture ───────────────────────────── */
+.bg-grid {
+  background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Ambient gradient orbs ─────────────────────────────── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulseOrb 8s ease-in-out infinite;
+}
+@keyframes pulseOrb {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.08); }
+}
+
+/* ── Mono font utility ─────────────────────────────────── */
+.font-mono { font-family: 'JetBrains Mono', monospace; }
